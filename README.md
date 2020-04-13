@@ -45,6 +45,47 @@ This is the home screen view
 
 
 ![image](https://user-images.githubusercontent.com/39657409/79128799-ba8a3000-7dc1-11ea-841b-9e7dbaf7f55b.png)
+
+When you pass the value from one fragment to another fragment have to declare safeargs in the nav_graph.xml like as below
+
+<fragment
+        android:id="@+id/specifyAmountFragment"
+        android:name="net.kathir.jetpacknavigationcomponent.SpecifyAmountFragment"
+        android:label="fragment_specify_amount"
+        tools:layout="@layout/fragment_specify_amount" >
+
+        <argument android:name="recipient"
+            android:defaultValue="None"/>
+
+        <action
+            android:id="@+id/action_specifyAmountFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+
 ![image](https://user-images.githubusercontent.com/39657409/79128852-ce359680-7dc1-11ea-867d-d63f1e1143e5.png)
+
+If you want to pass the whole Model class object via bundle the have to use the following approaches
+
+ <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="net.kathir.jetpacknavigationcomponent.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation">
+
+        <argument android:name="recipient"
+            android:defaultValue="None"/>
+
+        <argument android:name="amount"
+            app:argType="net.kathir.jetpacknavigationcomponent.Money"/>. //Here Money is the POJO class
+
+    </fragment>
+
+
 ![image](https://user-images.githubusercontent.com/39657409/79128867-d68dd180-7dc1-11ea-8e15-b82b65d83a21.png)
+
 ![image](https://user-images.githubusercontent.com/39657409/79128884-dc83b280-7dc1-11ea-9f5f-158c8c06e976.png)
