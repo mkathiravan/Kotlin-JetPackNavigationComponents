@@ -48,7 +48,7 @@ This is the home screen view
 
 When you pass the value from one fragment to another fragment have to declare safeargs in the nav_graph.xml like as below
 
-<fragment
+      <fragment
         android:id="@+id/specifyAmountFragment"
         android:name="net.kathir.jetpacknavigationcomponent.SpecifyAmountFragment"
         android:label="fragment_specify_amount"
@@ -85,6 +85,18 @@ If you want to pass the whole Model class object via bundle the have to use the 
 
     </fragment>
 
+Whenever you want to navigate to Home Fragment in the navigation flow we have to registering OnBackPressedCallback on your Fragments via addOnBackPressedCallback, and call popBackStack to navigate to your HomeFragment.
+
+       @Override
+       public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+
+        requireActivity().addOnBackPressedCallback(getViewLifecycleOwner(), () -> {
+               navController.popBackStack(R.id.homeFragment, false);
+            });
+            return true;
+        });
 
 ![image](https://user-images.githubusercontent.com/39657409/79128867-d68dd180-7dc1-11ea-8e15-b82b65d83a21.png)
 
